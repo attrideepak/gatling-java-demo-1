@@ -8,6 +8,10 @@ import static io.gatling.javaapi.core.CoreDsl.*;
 public class Cars extends BaseSimulation {
 
     FeederBuilder<String> feeder = csv("testdata.csv").circular();
+
+    // Json feeder
+    // FeederBuilder.FileBased<Object> jsonFeeder = jsonFile("testData.json").random();
+
     private CarsClient carsClient = new CarsClient();
 
     ScenarioBuilder scn = scenario("Get user")

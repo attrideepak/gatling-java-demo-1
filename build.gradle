@@ -16,6 +16,7 @@ dependencies {
 
     gatlingImplementation 'com.google.code.gson:gson:2.10.1'
     gatlingImplementation 'com.github.javafaker:javafaker:1.0.2'
+    gatlingImplementation 'org.postgresql:postgresql:42.7.4'
 
     implementation 'com.github.javafaker:javafaker:1.0.2'
     implementation 'com.google.code.gson:gson:2.10.1'

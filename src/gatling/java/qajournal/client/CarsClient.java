@@ -9,6 +9,9 @@ import io.gatling.javaapi.core.CoreDsl;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import models.CarsReq;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import static io.gatling.javaapi.core.CoreDsl.*;
 import static io.gatling.javaapi.core.CoreDsl.exec;
 import static io.gatling.javaapi.http.HttpDsl.http;
@@ -70,5 +73,19 @@ public class CarsClient {
         return exec(http("Delete car")
                 .delete(cars + "/#{carId}")
                 .check(status().is(HttpResponseStatus.OK.code())));
+    }
+
+    public ChainBuilder addEmailAndMobileNumber() {
+        Map<String, String> data = new HashMap<>();
+        data.put("email", "#{EMAIL}");
+        data.put("mobile", "#{MOBILE}");
+        try {
+            return exec(http("Add email and mobile number")
+                    .post("/contactDetails")
+                    .body(StringBody(mapper.writeValueAsString(data)))
+                    .check(status().is(HttpResponseStatus.CREATED.code())));
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
