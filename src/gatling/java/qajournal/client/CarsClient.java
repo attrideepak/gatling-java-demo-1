@@ -67,10 +67,32 @@ public class CarsClient {
                 .check(status().is(HttpResponseStatus.OK.code())));
     }
 
+    public ChainBuilder getCarById(String id) {
+        return exec(http("Get car")
+                .get(cars + "/" + id)
+                .check(status().is(HttpResponseStatus.OK.code()))
+                .check(jmesPath("brand").saveAs("brand")));
+    }
+
+    public Session setCondition(Session session) {
+        if(session.getString("brand").equalsIgnoreCase("tata")) {
+            return session.set("condition", "true");
+        } else {
+            return session.set("condition", "false");
+        }
+    }
+
     public ChainBuilder getCarByBrand() {
         return exec(http("Get car by brand")
                 .get(cars)
                 .queryParam("brand", "tata")
+                .check(status().is(HttpResponseStatus.OK.code())));
+    }
+
+    public ChainBuilder getCarByBrand(String brandName) {
+        return exec(http("Get car by brand:" +brandName)
+                .get(cars)
+                .queryParam("brand", brandName)
                 .check(status().is(HttpResponseStatus.OK.code())));
     }
 
