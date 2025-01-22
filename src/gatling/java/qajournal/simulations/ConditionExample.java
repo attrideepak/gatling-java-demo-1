@@ -86,9 +86,12 @@ public class ConditionExample extends BaseSimulation {
 
     ScenarioBuilder doSwitchAndRepeat = scenario("Do switch and Repeat loop")
             .exec(doSwitch("#{brand}").on(
-                    onCase("tata").then(repeat(2).on(exec(carsClient.getCarByBrand("tata")))),
-                    onCase("maruti").then(repeat(3).on(exec(carsClient.getCarByBrand("maruti")))),
-                    onCase("ford").then(repeat(4).on(exec(carsClient.getCarByBrand("ford")))
+                    onCase("tata").then(repeat(2).on(
+                            exec(carsClient.getCarByBrand("tata")))),
+                    onCase("maruti").then(repeat(3).on(
+                            exec(carsClient.getCarByBrand("maruti")))),
+                    onCase("ford").then(repeat(4).on(
+                            exec(carsClient.getCarByBrand("ford")))
             )));
 
     {
